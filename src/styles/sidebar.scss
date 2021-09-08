@@ -4,7 +4,68 @@
     min-height: 100%;
     transition: margin-left .28s;
     margin-left: $sideBarWidth;
+    padding-top: $headerHeight;
     position: relative;
+  }
+
+  .header-container {
+    height: 48px;
+    line-height: 48px;
+    width: 100%;
+    background: $headerBg;
+    color: rgba(0,0,0,.85);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1002;
+    display: flex;
+    justify-content: space-between;
+    .logo {
+      margin-left: 20px;
+      height: 48px;
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      span {
+        margin-left: 10px;
+        color: #fff;
+        font-size: 18px;
+        line-height: 1;
+      }
+    }
+    .right-menu {
+      margin-right: 10px;
+      height: 100%;
+      line-height: 48px;
+      display: flex;
+      align-items: center;
+      &:focus {
+        outline: none;
+      }
+      .item {
+        padding: 0 12px;
+        transition: all .2s cubic-bezier(0.215, 0.610, 0.355, 1);
+        background: rgba(255,255,255,0);
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        &:hover {
+          background: rgba(255,255,255,.05);
+        }
+      }
+      .user-info {
+        display: flex;
+        align-items: center;
+        .avatar {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+        }
+        .name {
+          margin-left: 10px;
+        }
+      }
+    }
   }
 
   .sidebar-container {
@@ -14,11 +75,12 @@
     height: 100%;
     position: fixed;
     font-size: 0px;
-    top: 0;
+    top: $headerHeight;
     bottom: 0;
     left: 0;
     z-index: 1001;
     overflow: hidden;
+    box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
 
     // reset element-ui css
     .horizontal-collapse-transition {
@@ -66,15 +128,90 @@
       border: none;
       height: 100%;
       width: 100% !important;
+      .el-submenu__title {
+        margin-bottom: 8px;
+        height: 42px;
+        line-height: 42px;
+      }
+      .el-menu-item {
+        margin-bottom: 8px;
+        height: 42px;
+        line-height: 42px;
+        &:after {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          border-right: 3px solid $menuActiveBorder;
+          transform: scaleY(0);
+          opacity: 1;
+          transition: transform .15s cubic-bezier(.215,.61,.355,1), opacity .15s cubic-bezier(.215,.61,.355,1);
+          content: '';
+        }
+
+        &.is-active {
+          background: $menuActiveBg !important;
+          &:after {
+            transform: scaleY(1);
+            opacity: 1;
+            transition: transform .15s cubic-bezier(.645,.045,.355,1),opacity .15s cubic-bezier(.645,.045,.355,1);
+          }
+        }
+      }
+      .el-icon-arrow-down {
+        margin-top: 0;
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        width: 10px;
+        color: $menuText;
+        transform: translateY(-50%);
+        transition: transform .3s cubic-bezier(.645,.045,.355,1);
+        font-size: 0;
+        &:before,
+        &:after {
+          position: absolute;
+          width: 7px;
+          height: 1.5px;
+          background-color: #333;
+          border-radius: 2px;
+          transition: background .3s cubic-bezier(.645,.045,.355,1),transform .3s cubic-bezier(.645,.045,.355,1),top .3s cubic-bezier(.645,.045,.355,1),color .3s cubic-bezier(.645,.045,.355,1);
+          content: '';
+        }
+        &:before {
+          transform: rotate(-45deg) translateX(3px);
+        }
+        &:after {
+          transform: rotate(45deg) translateX(-3px);
+        }
+      }
+      .is-opened {
+        .el-icon-arrow-down {
+          &:before {
+            transform: rotate(45deg) translateX(2.5px);
+          }
+          &:after {
+            transform: rotate(-45deg) translateX(-2.5px);
+          }
+        }
+      }
     }
 
     // menu hover
     .submenu-title-noDropdown,
     .el-submenu__title {
       &:hover {
+        color: $menuActiveText !important;
         background-color: $menuHover !important;
+        .el-icon-arrow-down {
+          &:before,
+          &:after {
+            background-color: $menuActiveText !important;
+          }
+        }
       }
     }
+
 
     .is-active>.el-submenu__title {
       color: $subMenuActiveText !important;
@@ -84,9 +221,8 @@
     & .el-submenu .el-menu-item {
       min-width: $sideBarWidth !important;
       background-color: $subMenuBg !important;
-
       &:hover {
-        background-color: $subMenuHover !important;
+        color: $menuActiveText !important;
       }
     }
   }

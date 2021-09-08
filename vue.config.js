@@ -24,11 +24,11 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: '/',
+  publicPath: process.env.VUE_APP_ROUTER,
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
-  productionSourceMap: false,
+  productionSourceMap: process.env.NODE_ENV !== 'production',
   devServer: {
     port: port,
     open: true,
@@ -41,6 +41,7 @@ module.exports = {
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
+    devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : undefined,
     name: name,
     resolve: {
       alias: {
