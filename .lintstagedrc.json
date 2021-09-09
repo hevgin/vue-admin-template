@@ -1,0 +1,5 @@
+{
+  "lint-staged": {
+    "src/**/*.{js,vue,jsx,ts,tsx}": "eslint"
+  }
+}
