@@ -1,6 +1,6 @@
 <template>
-  <div :class="{'show':show}" class="header-search">
-    <svg-icon icon-class="search" @click.stop="click" />
+  <div :class="{'show':show}" class="header-search" @click.stop="click">
+    <svg-icon icon-class="search" />
     <el-select
       ref="headerSearchSelect"
       v-model="search"

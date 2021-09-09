@@ -31,7 +31,7 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
-  height: 42px;
+  height: 44px;
   overflow: hidden;
   position: relative;
   background: #fff;

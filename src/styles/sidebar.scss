@@ -6,6 +6,14 @@
     margin-left: $sideBarWidth;
     padding-top: $headerHeight;
     position: relative;
+    .header-container {
+      position: relative;
+      justify-content: right;
+      color: #333;
+      .header-search .header-search-select .el-input__inner {
+        border: 1px solid #c0c4cc;
+      }
+    }
   }
 
   .header-container {
@@ -20,6 +28,8 @@
     z-index: 1002;
     display: flex;
     justify-content: space-between;
+    color: $headerText;
+    box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
     .logo {
       margin-left: 20px;
       height: 48px;
@@ -28,7 +38,6 @@
       align-items: center;
       span {
         margin-left: 10px;
-        color: #fff;
         font-size: 18px;
         line-height: 1;
       }
@@ -46,9 +55,9 @@
         padding: 0 12px;
         transition: all .2s cubic-bezier(0.215, 0.610, 0.355, 1);
         background: rgba(255,255,255,0);
-        color: #fff;
         cursor: pointer;
         font-size: 14px;
+        color: $headerText;
         &:hover {
           background: rgba(255,255,255,.05);
         }
@@ -81,6 +90,10 @@
     z-index: 1001;
     overflow: hidden;
     box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
+    &.has-logo {
+      top: 0;
+      z-index: 1003;
+    }
 
     // reset element-ui css
     .horizontal-collapse-transition {
@@ -128,22 +141,23 @@
       border: none;
       height: 100%;
       width: 100% !important;
+      &.el-menu--inline {
+        background-color: $subMenuBg !important;
+      }
       .el-submenu__title {
-        margin-bottom: 8px;
-        height: 42px;
-        line-height: 42px;
+        height: 44px;
+        line-height: 44px;
       }
       .el-menu-item {
-        margin-bottom: 8px;
-        height: 42px;
-        line-height: 42px;
+        height: 44px;
+        line-height: 44px;
         &:after {
           position: absolute;
           top: 0;
           right: 0;
           bottom: 0;
-          border-right: 3px solid $menuActiveBorder;
-          transform: scaleY(0);
+          border-right: 4px solid $menuActiveBorder;
+          transform: scaleY(0.0001);
           opacity: 1;
           transition: transform .15s cubic-bezier(.215,.61,.355,1), opacity .15s cubic-bezier(.215,.61,.355,1);
           content: '';
@@ -173,7 +187,7 @@
           position: absolute;
           width: 7px;
           height: 1.5px;
-          background-color: #333;
+          background-color: $menuText;
           border-radius: 2px;
           transition: background .3s cubic-bezier(.645,.045,.355,1),transform .3s cubic-bezier(.645,.045,.355,1),top .3s cubic-bezier(.645,.045,.355,1),color .3s cubic-bezier(.645,.045,.355,1);
           content: '';
@@ -185,13 +199,15 @@
           transform: rotate(45deg) translateX(-3px);
         }
       }
-      .is-opened {
+      .is-opened > .el-submenu__title {
         .el-icon-arrow-down {
           &:before {
             transform: rotate(45deg) translateX(2.5px);
+            background-color: $menuActiveText;
           }
           &:after {
             transform: rotate(-45deg) translateX(-2.5px);
+            background-color: $menuActiveText;
           }
         }
       }
@@ -202,7 +218,7 @@
     .el-submenu__title {
       &:hover {
         color: $menuActiveText !important;
-        background-color: $menuHover !important;
+        background-color: $menuHoverBg !important;
         .el-icon-arrow-down {
           &:before,
           &:after {
@@ -223,6 +239,7 @@
       background-color: $subMenuBg !important;
       &:hover {
         color: $menuActiveText !important;
+        background-color: $menuHoverBg !important;
       }
     }
   }
@@ -336,8 +353,7 @@
   .nest-menu .el-submenu>.el-submenu__title,
   .el-menu-item {
     &:hover {
-      // you can use $subMenuHover
-      background-color: $menuHover !important;
+      background-color: $menuHoverBg !important;
     }
   }
 
