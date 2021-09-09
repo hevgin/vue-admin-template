@@ -63,3 +63,39 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+
+// 列表查询
+.search-form {
+  margin-bottom: 12px;
+  .el-card__body {
+    padding-bottom: 0;
+  }
+  .el-form-item__label {
+    font-weight: normal;
+  }
+  .el-select {
+    display: block;
+  }
+  .el-date-editor.el-input,
+  .el-date-editor.el-input__inner {
+    width: 100%;
+  }
+}
+
+.table-list {
+  .el-card__header {
+    padding: 18px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 0 none;
+  }
+  .el-table__header th {
+    background: #fafafa;
+  }
+}
+// 列表分页
+.el-card .el-pagination {
+  text-align: right;
+  margin-top: 20px;
+}
