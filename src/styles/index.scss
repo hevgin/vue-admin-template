@@ -64,6 +64,113 @@ div:focus {
   padding: 20px;
 }
 
+// 表单组件动画
+@keyframes checkedEffect {
+  0% {
+    transform: scale(1);
+    opacity: 1
+  }
+  to {
+    transform: scale(1.5);
+    opacity: 0
+  }
+}
+@keyframes buttonEffect {
+  100% {
+    top: -6px;
+    left: -6px;
+    bottom: -6px;
+    right: -6px;
+    border-width: 6px;
+  }
+}
+@keyframes switchEffect {
+  to {
+    box-shadow: 0 0 0 6px #1890ff
+  }
+}
+@keyframes fadeEffect {
+  100% {
+    opacity: 0;
+  }
+}
+.el-radio__input.is-checked {
+  .el-radio__inner {
+    position: relative;
+    &:before {
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
+      border: 1px solid #1890ff;
+      border-radius: 50%;
+      opacity: 0;
+      animation: checkedEffect .36s ease-in-out;
+      animation-fill-mode: backwards;
+      content: "";
+    }
+  }
+}
+.el-checkbox__input.is-checked {
+  .el-checkbox__inner {
+    position: relative;
+    &:before {
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
+      border: 1px solid #1890ff;
+      border-radius: 2px;
+      opacity: 0;
+      animation: checkedEffect .36s ease-in-out;
+      animation-fill-mode: backwards;
+      content: ""
+    }
+  }
+}
+
+.el-switch.is-checked {
+  .el-switch__core {
+    position: relative;
+    &:before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      box-shadow: 0 0 0 0 #1890ff;
+      border-radius: inherit;
+      opacity: .2;
+      animation: fadeEffect 2s cubic-bezier(.08,.82,.17,1),switchEffect .4s cubic-bezier(.08,.82,.17,1);
+      animation-fill-mode: forwards;
+      content: "";
+      pointer-events: none
+    }
+  }
+}
+.el-button {
+  position: relative;
+  &:active:after,
+  &:focus:after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    bottom: -1px;
+    right: -1px;
+    border-radius: inherit;
+    border: 0 solid #1890ff;
+    opacity: .2;
+    animation: fadeEffect 1.5s cubic-bezier(0.08, 0.82, 0.17, 1) forwards, buttonEffect 0.4s cubic-bezier(0.08, 0.82, 0.17, 1) forwards;
+    display: block;
+    pointer-events: none;
+  }
+}
+
+
 // 列表查询
 .search-form {
   margin-bottom: 12px;
@@ -77,7 +184,11 @@ div:focus {
     display: block;
   }
   .el-date-editor.el-input,
-  .el-date-editor.el-input__inner {
+  .el-date-editor.el-input__inner,
+  .el-date-editor--daterange.el-input,
+  .el-date-editor--daterange.el-input__inner,
+  .el-date-editor--timerange.el-input,
+  .el-date-editor--timerange.el-input__inner {
     width: 100%;
   }
 }

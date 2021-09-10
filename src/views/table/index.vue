@@ -31,12 +31,12 @@
         <el-row :gutter="20">
           <el-col :span="8">
             <el-form-item label="开始时间">
-              <el-date-picker v-model="form.time1" type="datetime" placeholder="选择日期时间" />
+              <el-date-picker v-model="form.time1" type="daterange" format="yyyy-MM-dd" value-format="yyyy-MM-dd" placeholder="选择日期时间" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="结束时间">
-              <el-date-picker v-model="form.time2" type="datetime" placeholder="选择日期时间" />
+              <el-date-picker v-model="form.time2" type="datetimerange" placeholder="选择日期时间" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
