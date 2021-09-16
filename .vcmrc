@@ -1,0 +1,8 @@
+{
+  "types": [ "feat", "fix", "docs", "style", "refactor", "test", "chore"],
+  "warnOnFail": false,
+  "maxSubjectLength": 100,
+  "subjectPattern": ".+",
+  "subjectPatternErrorMsg": "请输入message信息!",
+  "helpMessage": "Commit message 格式错误， http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html"
+}
