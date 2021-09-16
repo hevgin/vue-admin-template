@@ -42,7 +42,7 @@ npm run lint
 # code format check and auto fix
 npm run lint -- --fix
 ```
-## husky && lint-staged
+## husky && lint-staged && validate-commit-msg
 
 ```bash
 # init husky
@@ -51,8 +51,21 @@ npx husky-init
 # package.json
 "lint-staged": {
   "src/**/*.{js,vue,jsx,ts,tsx}": "eslint"
-}
+},
+"config": {
+  "validate-commit-msg": {
+    "types": ["feat", "fix", "docs", "style", "refactor", "test", "chore"],
+    "warnOnFail": false,
+    "maxSubjectLength": 100,
+    "subjectPattern": ".+",
+    "subjectPatternErrorMsg": "请输入message信息!",
+    "helpMessage": "Commit message 格式错误， http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html"
+  }
+},
 
 # .husky/pre-commmit
 npx lint-staged
+
+# .husky/commit-msg
+npx validate-commit-msg
 ```
