@@ -203,10 +203,16 @@
         .el-icon-arrow-down {
           &:before {
             transform: rotate(45deg) translateX(2.5px);
-            background-color: $menuActiveText;
           }
           &:after {
             transform: rotate(-45deg) translateX(-2.5px);
+          }
+        }
+      }
+      .is-active > .el-submenu__title {
+        .el-icon-arrow-down {
+          &:before,
+          &:after {
             background-color: $menuActiveText;
           }
         }
