@@ -1,7 +1,13 @@
 <template>
-  <div :class="{'has-logo':showLogo}">
-    <logo v-if="showLogo" :collapse="isCollapse" />
+  <div :class="{'has-left-nav': layoutType === 2}">
     <el-scrollbar wrap-class="scrollbar-wrapper">
+      <template v-if="layoutType === 2">
+        <top-nav mode="vertical" wrap-class="left-nav-container" />
+        <div class="site-info-container">
+          <a :href="appHome" class="site-name">{{ siteName }}</a>
+          <el-divider>{{ currentRouteTitle }}</el-divider>
+        </div>
+      </template>
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
@@ -12,7 +18,7 @@
         :collapse-transition="false"
         mode="vertical"
       >
-        <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
+        <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -20,17 +26,25 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Logo from './Logo'
 import SidebarItem from './SidebarItem'
+import TopNav from '../TopNav'
 import variables from '@/styles/variables.scss'
 
 export default {
-  components: { SidebarItem, Logo },
+  components: { SidebarItem, TopNav },
   computed: {
     ...mapGetters([
       'permission_routes',
-      'sidebar'
+      'sidebar',
+      'currentChildRoute',
+      'currentRouteTitle'
     ]),
+    routes() {
+      if (this.$store.state.settings.layoutType > 0) {
+        return this.currentChildRoute
+      }
+      return this.permission_routes
+    },
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
@@ -40,14 +54,20 @@ export default {
       }
       return path
     },
-    showLogo() {
-      return this.$store.state.settings.sidebarLogo
+    siteName() {
+      return this.$store.state.settings.title
+    },
+    layoutType() {
+      return this.$store.state.settings.layoutType
     },
     variables() {
       return variables
     },
     isCollapse() {
       return !this.sidebar.opened
+    },
+    appHome() {
+      return process.env.VUE_APP_STATIC
     }
   }
 }

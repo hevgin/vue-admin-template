@@ -1,4 +1,3 @@
-#app {
 
   .main-container {
     min-height: 100%;
@@ -17,6 +16,7 @@
   }
 
   .header-container {
+    padding: 0 15px;
     height: 48px;
     line-height: 48px;
     width: 100%;
@@ -29,70 +29,73 @@
     display: flex;
     justify-content: space-between;
     color: $headerText;
-    box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
-    .logo {
-      margin-left: 20px;
-      height: 48px;
-      font-size: 32px;
-      display: flex;
-      align-items: center;
-      span {
-        margin-left: 10px;
-        font-size: 18px;
-        line-height: 1;
+    box-sizing: border-box;
+    // box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+  }
+
+  .right-panel-container {
+    height: 100%;
+    line-height: 48px;
+    display: flex;
+    align-items: center;
+    &:focus {
+      outline: none;
+    }
+    .item {
+      padding: 0 12px;
+      transition: all .2s cubic-bezier(0.215, 0.610, 0.355, 1);
+      background: rgba(255,255,255,0);
+      cursor: pointer;
+      font-size: 14px;
+      color: $headerText;
+      &:hover {
+        background: rgba(255,255,255,.05);
       }
     }
-    .right-menu {
-      margin-right: 10px;
-      height: 100%;
-      line-height: 48px;
+    .user-info {
       display: flex;
       align-items: center;
-      &:focus {
-        outline: none;
+      .avatar {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
       }
-      .item {
-        padding: 0 12px;
-        transition: all .2s cubic-bezier(0.215, 0.610, 0.355, 1);
-        background: rgba(255,255,255,0);
-        cursor: pointer;
-        font-size: 14px;
-        color: $headerText;
-        &:hover {
-          background: rgba(255,255,255,.05);
-        }
-      }
-      .user-info {
-        display: flex;
-        align-items: center;
-        .avatar {
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-        }
-        .name {
-          margin-left: 10px;
-        }
+      .name {
+        margin-left: 10px;
       }
     }
   }
 
   .sidebar-container {
     transition: width 0.28s;
-    width: $sideBarWidth !important;
+    width: $sideBarWidth;
     background-color: $menuBg;
     height: 100%;
     position: fixed;
-    font-size: 0px;
+    font-size: 0;
     top: $headerHeight;
     bottom: 0;
     left: 0;
-    z-index: 1001;
+    z-index: 1003;
     overflow: hidden;
     box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
-    &.has-logo {
-      top: 0;
-      z-index: 1003;
+    &.has-left-nav {
+      width: $leftNavWidth + $sideBarWidth;
+      .el-scrollbar {
+        padding-left: $leftNavWidth;
+        height: 100%;
+      }
+      + .main-container {
+        margin-left: $leftNavWidth + $sideBarWidth;
+        .header-container {
+          background: #fff;
+          color: #333;
+          border-bottom: 1px solid #f2f2f2;
+        }
+        .right-panel-container .item {
+          color: #333;
+        }
+      }
     }
 
     // reset element-ui css
@@ -110,12 +113,6 @@
 
     .el-scrollbar {
       height: 100%;
-    }
-
-    &.has-logo {
-      .el-scrollbar {
-        height: calc(100% - 50px);
-      }
     }
 
     .is-horizontal {
@@ -179,16 +176,16 @@
         right: 16px;
         width: 10px;
         color: $menuText;
-        transform: translateY(-50%);
+        transform: translateY(-50%) !important;
         transition: transform .3s cubic-bezier(.645,.045,.355,1);
         font-size: 0;
         &:before,
         &:after {
           position: absolute;
           width: 7px;
-          height: 1.5px;
+          height: 1px;
           background-color: $menuText;
-          border-radius: 2px;
+          border-radius: 1px;
           transition: background .3s cubic-bezier(.645,.045,.355,1),transform .3s cubic-bezier(.645,.045,.355,1),top .3s cubic-bezier(.645,.045,.355,1),color .3s cubic-bezier(.645,.045,.355,1);
           content: '';
         }
@@ -202,10 +199,10 @@
       .is-opened > .el-submenu__title {
         .el-icon-arrow-down {
           &:before {
-            transform: rotate(45deg) translateX(2.5px);
+            transform: rotate(45deg) translateX(3px);
           }
           &:after {
-            transform: rotate(-45deg) translateX(-2.5px);
+            transform: rotate(-45deg) translateX(-3px);
           }
         }
       }
@@ -251,11 +248,11 @@
 
   .hideSidebar {
     .sidebar-container {
-      width: 54px !important;
+      width: $leftNavWidth !important;
     }
 
     .main-container {
-      margin-left: 54px;
+      margin-left: $leftNavWidth !important;
     }
 
     .submenu-title-noDropdown {
@@ -341,7 +338,6 @@
       transition: none;
     }
   }
-}
 
 // when menu collapsed
 .el-menu--vertical {

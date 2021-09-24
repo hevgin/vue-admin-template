@@ -1,90 +1,75 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+    <div v-if="device === 'mobile' && sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
 
-    <div v-if="!sidebarLogo" class="header-container">
-      <a :href="appHome" class="logo">
-        <svg-icon icon-class="logo" />
-        <span>{{ title }}</span>
-      </a>
-      <div class="right-menu">
-        <header-search class="item" />
-        <screenfull class="item" />
-        <question class="item" />
-        <notice class="item" />
-        <el-dropdown class="item" trigger="click">
-          <div class="user-info">
-            <img class="avatar" :src="avatar">
-            <span class="name">Serati Ma</span>
-          </div>
-          <el-dropdown-menu slot="dropdown" class="user-dropdown">
-            <el-dropdown-item><i class="el-icon-user" />个人中心</el-dropdown-item>
-            <el-dropdown-item><i class="el-icon-setting" />个人设置</el-dropdown-item>
-            <el-dropdown-item divided @click.native="logout"> <i class="el-icon-switch-button" />退出登录</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+    <template v-if="layoutType === 0">
+      <div class="header-container">
+        <logo :collapse="false" />
+        <right-panel />
       </div>
-    </div>
-    <sidebar class="sidebar-container" />
-    <div class="main-container" :style="sidebarLogo ? 'padding-top: 0' : ''">
-      <div v-if="sidebarLogo" class="header-container">
-        <div class="right-menu">
-          <header-search class="item" />
-          <screenfull class="item" />
-          <question class="item" />
-          <notice class="item" />
-          <el-dropdown class="item" trigger="click">
-            <div class="user-info">
-              <img class="avatar" :src="avatar">
-              <span class="name">Serati Ma</span>
-            </div>
-            <el-dropdown-menu slot="dropdown" class="user-dropdown">
-              <el-dropdown-item><i class="el-icon-user" />个人中心</el-dropdown-item>
-              <el-dropdown-item><i class="el-icon-setting" />个人设置</el-dropdown-item>
-              <el-dropdown-item divided @click.native="logout"> <i class="el-icon-switch-button" />退出登录</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+      <sidebar class="sidebar-container" />
+      <div class="main-container">
+        <div :class="{'fixed-header':fixedHeader}">
+          <navbar />
         </div>
+        <app-main />
       </div>
-      <div :class="{'fixed-header':fixedHeader}">
-        <navbar />
+    </template>
+
+    <template v-else-if="layoutType === 1">
+      <div class="header-container">
+        <logo :collapse="false" />
+        <top-nav mode="horizontal" wrap-class="top-nav-container" />
+        <right-panel />
       </div>
-      <app-main />
-    </div>
+      <sidebar class="sidebar-container" />
+      <div class="main-container">
+        <div :class="{'fixed-header':fixedHeader}">
+          <navbar />
+        </div>
+        <app-main />
+      </div>
+    </template>
+
+    <template v-else-if="layoutType === 2">
+      <sidebar class="sidebar-container" style="top:0" />
+      <div class="main-container" style="padding-top:0">
+        <div class="header-container">
+          <right-panel />
+        </div>
+        <div :class="{'fixed-header':fixedHeader}">
+          <navbar />
+        </div>
+        <app-main />
+      </div>
+    </template>
+
   </div>
 </template>
 
 <script>
 import settings from '@/settings'
-import { Navbar, Sidebar, AppMain } from './components'
+import Logo from './components/Sidebar/Logo'
+import { Navbar, Sidebar, AppMain, TopNav, RightPanel } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
-import Screenfull from '@/components/Screenfull'
-import HeaderSearch from '@/components/HeaderSearch'
-import Question from '@/components/Question'
-import Notice from '@/components/Notice'
 
 export default {
   name: 'Layout',
   components: {
+    Logo,
     Navbar,
     Sidebar,
     AppMain,
-    Screenfull,
-    HeaderSearch,
-    Question,
-    Notice
+    TopNav,
+    RightPanel
   },
   mixins: [ResizeMixin],
   data() {
     return {
-      sidebarLogo: settings.sidebarLogo,
       title: settings.title
     }
   },
   computed: {
-    avatar() {
-      return this.$store.state.user.avatar || `${process.env.VUE_APP_STATIC}img/avatar.png`
-    },
     sidebar() {
       return this.$store.state.app.sidebar
     },
@@ -94,6 +79,9 @@ export default {
     fixedHeader() {
       return this.$store.state.settings.fixedHeader
     },
+    layoutType() {
+      return this.$store.state.settings.layoutType
+    },
     classObj() {
       return {
         hideSidebar: !this.sidebar.opened,
@@ -101,18 +89,11 @@ export default {
         withoutAnimation: this.sidebar.withoutAnimation,
         mobile: this.device === 'mobile'
       }
-    },
-    appHome() {
-      return process.env.VUE_APP_STATIC
     }
   },
   methods: {
     handleClickOutside() {
       this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
-    },
-    async logout() {
-      await this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   }
 }

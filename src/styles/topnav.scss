@@ -1,0 +1,101 @@
+.top-nav-container {
+  .el-menu {
+    background: none;
+    &.el-menu--horizontal {
+      border-bottom: 0 none;
+      > .el-menu-item {
+        height: $headerHeight;
+        line-height: $headerHeight;
+        border-bottom: 0 none;
+        color: $headerText;
+        position: relative;
+        &:focus {
+          background: initial;
+        }
+        &:hover {
+          background: rgba(255,255,255,.05);
+        }
+        &.is-active:after {
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          margin-left: -3px;
+          content: '';
+          width: 0;
+          height: 0;
+          font-size: 0;
+          border: 5px solid transparent;
+          border-bottom-color: #fff;
+        }
+        a {
+          display: flex;
+          align-items: center;
+          i, svg {
+            margin: 0 5px 0 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.left-nav-container {
+  width: $leftNavWidth;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background: $leftNavBg;
+  .el-menu {
+    background: initial;
+    .el-menu-item {
+      padding: 5px !important;
+      height: $leftNavWidth;
+      line-height: 1;
+      overflow: hidden;
+      &:hover {
+        background: initial;
+      }
+      &:after {
+        display: none;
+      }
+      &.is-active {
+        background: initial !important;
+        a {
+          background: $menuActiveText;
+          border-radius: 5px;
+        }
+      }
+      a {
+        color: #fff;
+        display: flex;
+        overflow: hidden;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        i, svg {
+          margin: 0 0 5px 0;
+        }
+      }
+    }
+  }
+}
+
+.site-info-container {
+  margin: 0 15px;
+  white-space: nowrap;
+  .site-name {
+    height: $headerHeight;
+    line-height: $headerHeight;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 2px;
+    color: #333;
+  }
+  .el-divider--horizontal {
+    margin-top: 12px;
+    background: #f6f6f6;
+  }
+}

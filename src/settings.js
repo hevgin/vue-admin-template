@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'China Unicom CUSC',
+  title: '统一运营管理平台',
 
   /**
    * @type {boolean} true | false
@@ -10,7 +10,13 @@ module.exports = {
 
   /**
    * @type {boolean} true | false
-   * @description Whether show the logo in sidebar
+   * @description Whether show the icon in nav
    */
-  sidebarLogo: false
+  showNavIcon: false,
+
+  /**
+   * @type {number} 0 | 1 | 2
+   * @description Whether show the nav in sidebar
+   */
+  layoutType: 2
 }

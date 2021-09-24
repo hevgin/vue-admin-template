@@ -1,11 +1,12 @@
 import defaultSettings from '@/settings'
+import Cookies from 'js-cookie'
 
-const { showSettings, fixedHeader, sidebarLogo } = defaultSettings
-
+const { title, showNavIcon, fixedHeader, layoutType } = defaultSettings
 const state = {
-  showSettings: showSettings,
-  fixedHeader: fixedHeader,
-  sidebarLogo: sidebarLogo
+  title,
+  showNavIcon,
+  fixedHeader,
+  layoutType: +Cookies.get('layout') >= 0 ? +Cookies.get('layout') : layoutType
 }
 
 const mutations = {
@@ -13,6 +14,10 @@ const mutations = {
     // eslint-disable-next-line no-prototype-builtins
     if (state.hasOwnProperty(key)) {
       state[key] = value
+
+      if (key === 'layoutType') {
+        Cookies.set('layout', value)
+      }
     }
   }
 }

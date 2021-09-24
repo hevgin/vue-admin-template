@@ -23,6 +23,7 @@
 // make search results more in line with expectations
 import Fuse from 'fuse.js'
 import path from 'path'
+import bus from '@/utils/bus'
 
 export default {
   name: 'HeaderSearch',
@@ -72,6 +73,7 @@ export default {
     },
     change(val) {
       this.$router.push(val.path)
+      bus.$emit('SET_CHILD_ROUTES')
       this.search = ''
       this.options = []
       this.$nextTick(() => {

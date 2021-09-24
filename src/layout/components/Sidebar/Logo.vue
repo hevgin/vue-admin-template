@@ -1,14 +1,14 @@
 <template>
   <div class="sidebar-logo-container" :class="{'collapse':collapse}">
     <transition name="sidebarLogoFade">
-      <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
+      <a v-if="collapse" key="collapse" :href="appHome" class="sidebar-logo-link">
         <svg-icon class="sidebar-logo" icon-class="logo" />
         <h1 class="sidebar-title">{{ title }} </h1>
-      </router-link>
-      <router-link v-else key="expand" class="sidebar-logo-link" to="/">
+      </a>
+      <a v-else key="expand" :href="appHome" class="sidebar-logo-link">
         <svg-icon class="sidebar-logo" icon-class="logo" />
         <h1 class="sidebar-title">{{ title }} </h1>
-      </router-link>
+      </a>
     </transition>
   </div>
 </template>
@@ -49,10 +49,8 @@ export default {
 
 .sidebar-logo-container {
   position: relative;
-  width: 100%;
   height: $headerHeight;
   line-height: $headerHeight;
-  background: #2b2f3a;
   text-align: center;
   overflow: hidden;
 
@@ -64,24 +62,23 @@ export default {
       width: 32px;
       height: 32px;
       vertical-align: middle;
-      margin-right: 12px !important;
+      margin-right: 10px;
     }
 
     & .sidebar-title {
       display: inline-block;
       margin: 0;
       color: #fff;
-      font-weight: 600;
-      line-height: 50px;
-      font-size: 14px;
-      font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+      font-weight: normal;
+      letter-spacing: 2px;
+      font-size: 16px;
       vertical-align: middle;
     }
   }
 
   &.collapse {
     .sidebar-logo {
-      margin-right: 3px !important;
+      margin-right: 3px;
     }
   }
 }

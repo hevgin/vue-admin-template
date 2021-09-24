@@ -1,36 +1,39 @@
 // light
-// $menuText:rgba(0,0,0,.85);
-// $menuActiveText:#1890ff;
-// $subMenuActiveText:#1890ff;
-// $menuActiveBg: #e6f7ff;
-// $menuActiveBorder: #1890ff;
+$menuText:rgba(0,0,0,.85);
+$menuActiveText:#1890ff;
+$subMenuActiveText:#1890ff;
+$menuActiveBg: #e6f7ff;
+$menuActiveBorder: #1890ff;
 
-// $menuBg:#fff;
-// $menuHoverBg:rgba(255, 255, 255, 0.04);
-
-// $subMenuBg:#fff;
-// $headerText: #fff;
-// $headerBg: #001529;
-
-
-// night
-$menuText:rgba(255,255,255,.65);
-$menuActiveText:#fff;
-$subMenuActiveText:#fff;
-$menuActiveBg: #1890ff;
-$menuActiveBorder: rgba(255, 255, 255, 0.6);
-
-$menuBg:#001529;
+$menuBg:#fff;
 $menuHoverBg:rgba(255, 255, 255, 0.04);
 
-$subMenuBg:#000c17;
+$subMenuBg:#fff;
 $headerText: #fff;
 $headerBg: #001529;
 
 
 
+// night
+// $menuText:rgba(255,255,255,.65);
+// $menuActiveText:#fff;
+// $subMenuActiveText:#fff;
+// $menuActiveBg: #1890ff;
+// $menuActiveBorder: rgba(255, 255, 255, 0.6);
+
+// $menuBg:#001529;
+// $menuHoverBg:rgba(255, 255, 255, 0.04);
+
+// $subMenuBg:#000c17;
+// $headerText: #fff;
+// $headerBg: #001529;
+
+
+
 $sideBarWidth: 210px;
 $headerHeight: 48px;
+$leftNavWidth: 64px;
+$leftNavBg: #001529;
 
 // the :export directive is the magic sauce for webpack
 // https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
@@ -44,6 +47,8 @@ $headerHeight: 48px;
   sideBarWidth: $sideBarWidth;
   headerHeight: $headerHeight;
   headerText: $headerText;
+  leftNavWidth: $leftNavWidth;
+  leftNavBg: $leftNavBg;
   headerBg: $headerBg;
   menuActiveBg: $menuActiveBg;
   menuActiveBorder: $menuActiveBorder;
