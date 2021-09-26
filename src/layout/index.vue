@@ -82,7 +82,7 @@ export default {
     classObj() {
       return {
         'hide-sidebar': !this.sidebar.opened,
-        openSidebar: this.sidebar.opened,
+        'open-sidebar': this.sidebar.opened,
         'without-animation': this.sidebar.withoutAnimation,
         mobile: this.device === 'mobile'
       }
