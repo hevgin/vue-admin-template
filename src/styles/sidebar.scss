@@ -6,7 +6,7 @@ $navbarHeight: 44px;
   min-height: 100%;
   width: 100%;
   background: #f0f2f5;
-  &.mobile.openSidebar{
+  &.mobile.open-sidebar{
     position: fixed;
     top: 0;
   }
@@ -350,7 +350,7 @@ $navbarHeight: 44px;
     }
   }
 }
-.hideSidebar {
+.hide-sidebar {
   .sidebar-container {
     width: $leftNavWidth;
   }
@@ -420,51 +420,10 @@ $navbarHeight: 44px;
   }
 }
 
-
-.drawer-bg {
-  background: #000;
-  opacity: 0.3;
-  width: 100%;
-  top: 0;
-  height: 100%;
-  position: absolute;
-  z-index: 999;
-}
-
 .el-menu--collapse .el-menu .el-submenu {
   min-width: $sideBarWidth !important;
 }
-// mobile responsive
-.mobile {
-  .main-container {
-    margin-left: 0 !important;
-  }
-  .header-container,
-  .navbar-container {
-    left: 0 !important;
-  }
-  .sidebar-container {
-    transition: transform .28s;
-    width: $sideBarWidth + $leftNavWidth !important;
-  }
-  .app-container {
-    padding: 10px;
-  }
-  &.hideSidebar {
-    .sidebar-container {
-      pointer-events: none;
-      transition-duration: 0.3s;
-      transform: translate3d(-($sideBarWidth + $leftNavWidth), 0, 0);
-    }
-  }
-}
 
-.withoutAnimation {
-  .main-container,
-  .sidebar-container {
-    transition: none;
-  }
-}
 // when menu collapsed
 .el-menu--vertical {
   &>.el-menu {
@@ -500,6 +459,46 @@ $navbarHeight: 44px;
     &::-webkit-scrollbar-thumb {
       background: #99a9bf;
       border-radius: 20px;
+    }
+  }
+}
+
+// mobile responsive
+.mobile {
+  .drawer-bg {
+    background: #000;
+    opacity: 0.3;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    position: absolute;
+    z-index: 999;
+  }
+  .main-container {
+    margin-left: 0 !important;
+  }
+  .header-container,
+  .navbar-container {
+    left: 0 !important;
+  }
+  .sidebar-container {
+    transition: transform .28s;
+    width: $sideBarWidth + $leftNavWidth !important;
+  }
+  .app-container {
+    padding: 10px;
+  }
+  &.hide-sidebar {
+    .sidebar-container {
+      pointer-events: none;
+      transition-duration: 0.3s;
+      transform: translate3d(-($sideBarWidth + $leftNavWidth), 0, 0);
+    }
+  }
+  &.without-animation {
+    .main-container,
+    .sidebar-container {
+      transition: none;
     }
   }
 }
