@@ -1,11 +1,10 @@
 import defaultSettings from '@/settings'
 import Cookies from 'js-cookie'
 
-const { title, showNavIcon, fixedHeader, layoutType } = defaultSettings
+const { title, showNavIcon, layoutType } = defaultSettings
 const state = {
   title,
   showNavIcon,
-  fixedHeader,
   layoutType: +Cookies.get('layout') >= 0 ? +Cookies.get('layout') : layoutType
 }
 
