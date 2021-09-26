@@ -26,6 +26,22 @@ $navbarHeight: 44px;
         left: $leftNavWidth + $sideBarWidth;
         height: $headerHeight + 10px;
         line-height: $headerHeight + 10px;
+        .navbar-container {
+          position: relative;
+          top: initial;
+          left: 0;
+          display: flex;
+          align-items: center;
+        }
+        .navbar {
+          height: $headerHeight + 10px;
+          display: flex;
+          align-items: center;
+          box-shadow: none;
+          .hamburger-container {
+            line-height: $headerHeight + 10px;
+          }
+        }
       }
       .navbar-container {
         left: $leftNavWidth + $sideBarWidth;
@@ -229,26 +245,21 @@ $navbarHeight: 44px;
     position: relative;
     background: #fff;
     box-shadow: 0 1px 4px rgba(0,21,41,.08);
+    display: flex;
 
     .hamburger-container {
+      padding: 0 10px;
       line-height: $navbarHeight;
       height: 100%;
-      float: left;
+      display: flex;
+      align-items: center;
       cursor: pointer;
       transition: background .3s;
       -webkit-tap-highlight-color: transparent;
-
-      &:hover {
-        background: rgba(0, 0, 0, .025)
-      }
-    }
-    .breadcrumb-container {
-      float: left;
     }
     .el-breadcrumb {
       height: $navbarHeight;
-      display: flex;
-      align-items: center;
+      line-height: $navbarHeight;
       .no-redirect {
         color: #97a8be;
         cursor: text;
@@ -262,7 +273,6 @@ $navbarHeight: 44px;
   margin-left: $sideBarWidth;
   padding-top: $headerHeight + $navbarHeight;
   .header-container {
-    justify-content: right;
     color: #333;
     .header-search .header-search-select .el-input__inner {
       border: 1px solid #c0c4cc;
