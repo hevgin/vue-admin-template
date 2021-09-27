@@ -2,7 +2,7 @@
   <div :class="{'has-left-nav': layoutType === 2}">
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <template v-if="layoutType === 2">
-        <top-nav mode="vertical" wrap-class="left-nav-container" />
+        <top-nav position="left" wrap-class="left-nav-container" />
         <div class="site-info-container">
           <a :href="appHome" class="site-name">{{ siteName }}</a>
           <el-divider>{{ currentRouteTitle }}</el-divider>

@@ -19,7 +19,7 @@
     <template v-else-if="layoutType === 1">
       <div class="header-container">
         <logo :collapse="false" />
-        <top-nav mode="horizontal" wrap-class="top-nav-container" />
+        <top-nav position="top" wrap-class="top-nav-container" />
         <right-panel />
       </div>
       <sidebar class="sidebar-container" />

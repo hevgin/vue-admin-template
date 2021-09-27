@@ -1,14 +1,24 @@
 <template>
   <div :class="wrapClass">
     <logo v-if="layoutType === 2" :collapse="true" />
-    <el-menu :active-text-color="variables.menuActiveText" :default-active="activeMenu" :mode="mode" @select="setChildRoutes">
+
+    <el-tabs :value="activeMenu" type="card" :tab-position="position">
+      <el-tab-pane v-for="tag in routes" :key="tag.path" :label="title(tag)" :name="tag.path">
+        <app-link slot="label" :to="resolvePath(tag)">
+          <item v-if="showNavIcon && icon(tag)" :icon="icon(tag)" :title="title(tag)" />
+          {{ title(tag) }}
+        </app-link>
+      </el-tab-pane>
+    </el-tabs>
+
+    <!-- <el-menu :active-text-color="variables.menuActiveText" :default-active="activeMenu" :mode="mode" @select="setChildRoutes">
       <el-menu-item v-for="item in routes" :key="item.path" :index="item.path">
         <app-link :to="resolvePath(item)">
           <item v-if="showNavIcon && icon(item)" :icon="icon(item)" :title="title(item)" />
           <span class="nav-name">{{ title(item) }}</span>
         </app-link>
       </el-menu-item>
-    </el-menu>
+    </el-menu> -->
   </div>
 </template>
 <script>
@@ -28,9 +38,9 @@ export default {
     Logo
   },
   props: {
-    mode: {
+    position: {
       type: String,
-      default: 'vertical'
+      default: 'top'
     },
     wrapClass: {
       type: String,
