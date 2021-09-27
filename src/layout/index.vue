@@ -35,11 +35,12 @@
       <sidebar class="sidebar-container" style="top:0" />
       <div class="main-container">
         <div class="header-container">
+          <div class="navbar-container">
+            <navbar />
+          </div>
           <right-panel />
         </div>
-        <div class="navbar-container">
-          <navbar />
-        </div>
+        <tags-view />
         <app-main />
       </div>
     </template>
@@ -50,7 +51,7 @@
 <script>
 import settings from '@/settings'
 import Logo from './components/Sidebar/Logo'
-import { Navbar, Sidebar, AppMain, TopNav, RightPanel } from './components'
+import { Navbar, Sidebar, AppMain, TopNav, RightPanel, TagsView } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
@@ -61,7 +62,8 @@ export default {
     Sidebar,
     AppMain,
     TopNav,
-    RightPanel
+    RightPanel,
+    TagsView
   },
   mixins: [ResizeMixin],
   data() {

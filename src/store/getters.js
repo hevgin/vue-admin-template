@@ -7,6 +7,8 @@ const getters = {
   roles: state => state.user.roles,
   permission_routes: state => state.permission.routes,
   currentChildRoute: state => state.permission.currentChildRoute,
-  currentRouteTitle: state => state.permission.currentRouteTitle
+  currentRouteTitle: state => state.permission.currentRouteTitle,
+  visitedViews: state => state.tagsView.visitedViews,
+  cachedViews: state => state.tagsView.cachedViews
 }
 export default getters
