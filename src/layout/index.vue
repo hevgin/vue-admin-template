@@ -9,9 +9,7 @@
       </div>
       <sidebar class="sidebar-container" />
       <div class="main-container">
-        <div class="navbar-container">
-          <navbar />
-        </div>
+        <tags-view />
         <app-main />
       </div>
     </template>
@@ -24,9 +22,7 @@
       </div>
       <sidebar class="sidebar-container" />
       <div class="main-container">
-        <div class="navbar-container">
-          <navbar />
-        </div>
+        <tags-view />
         <app-main />
       </div>
     </template>
@@ -49,6 +45,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import settings from '@/settings'
 import Logo from './components/Sidebar/Logo'
 import { Navbar, Sidebar, AppMain, TopNav, RightPanel, TagsView } from './components'
@@ -72,9 +69,9 @@ export default {
     }
   },
   computed: {
-    sidebar() {
-      return this.$store.state.app.sidebar
-    },
+    ...mapGetters([
+      'sidebar'
+    ]),
     device() {
       return this.$store.state.app.device
     },

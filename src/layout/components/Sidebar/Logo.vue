@@ -1,11 +1,7 @@
 <template>
   <div class="sidebar-logo-container" :class="{'collapse':collapse}">
     <transition name="sidebarLogoFade">
-      <a v-if="collapse" key="collapse" :href="appHome" class="sidebar-logo-link">
-        <svg-icon class="sidebar-logo" icon-class="logo" />
-        <h1 class="sidebar-title">{{ title }} </h1>
-      </a>
-      <a v-else key="expand" :href="appHome" class="sidebar-logo-link">
+      <a :href="appHome" class="sidebar-logo-link">
         <svg-icon class="sidebar-logo" icon-class="logo" />
         <h1 class="sidebar-title">{{ title }} </h1>
       </a>

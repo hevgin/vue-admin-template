@@ -281,6 +281,19 @@ $navbarHeight: 44px;
   height: $navbarHeight;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  .hamburger-container {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    margin-top: -8px;
+    cursor: pointer;
+    color: #666;
+  }
+  &.has-hamburger {
+    .el-tabs {
+      margin-left: 40px;
+    }
+  }
   .el-tabs {
     margin-top: 12px;
   }
@@ -430,6 +443,9 @@ $navbarHeight: 44px;
     .sidebar-logo {
       margin-right: 3px;
     }
+    .sidebar-title {
+      display: none;
+    }
   }
 }
 
@@ -477,10 +493,8 @@ $navbarHeight: 44px;
   .navbar-container {
     left: $leftNavWidth;
   }
-  .has-left-nav + .main-container {
-    .tags-view-container {
-      left: $leftNavWidth;
-    }
+  .tags-view-container {
+    left: $leftNavWidth !important;
   }
   .main-container {
     margin-left: $leftNavWidth;

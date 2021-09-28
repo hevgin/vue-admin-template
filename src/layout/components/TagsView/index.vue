@@ -1,5 +1,6 @@
 <template>
-  <div class="tags-view-container">
+  <div class="tags-view-container" :class="{'has-hamburger': layoutType < 2}">
+    <hamburger v-if="layoutType < 2" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
     <el-tabs v-model="activeValue" type="card" @tab-remove="removeTab">
       <el-tab-pane v-for="tag in visitedViews" ref="tag" :key="tag.fullPath" :label="tag.title" :name="tag.fullPath" :closable="!isAffix(tag)">
         <span slot="label" class="el-tabs-name" @click="handleClick(tag)" @click.middle.native="!isAffix(tag) ? closeSelectedTag(tag) : ''" @click.right="openMenu(tag, $event)">{{ tag.title }}</span>
@@ -15,11 +16,14 @@
 </template>
 
 <script>
-// import ScrollPane from './ScrollPane'
+import { mapGetters } from 'vuex'
 import path from 'path'
+import Hamburger from '@/components/Hamburger'
 
 export default {
-  // components: { ScrollPane },
+  components: {
+    Hamburger
+  },
   data() {
     return {
       visible: false,
@@ -31,6 +35,12 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'sidebar'
+    ]),
+    layoutType() {
+      return this.$store.state.settings.layoutType
+    },
     visitedViews() {
       return this.$store.state.tagsView.visitedViews
     },
@@ -56,6 +66,10 @@ export default {
     this.addTags()
   },
   methods: {
+    toggleSideBar() {
+      this.$store.dispatch('app/toggleSideBar')
+    },
+
     handleClick(route) {
       this.activeValue = route.fullPath
       this.$router.push({ name: route.name, params: route.params, query: route.query })

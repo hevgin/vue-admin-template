@@ -35,29 +35,31 @@ import tableRouter from './modules/table'
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
-export const constantRoutes = [
-  {
-    path: '/redirect',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: '/redirect/:path(.*)',
-        component: () => import('@/views/redirect/index')
-      }
-    ]
-  },
-  {
-    path: '/login',
-    component: () => import('@/views/login/index'),
-    hidden: true
-  },
+export const constantRoutes = [{
+  path: '/redirect',
+  component: Layout,
+  hidden: true,
+  children: [{
+    path: '/redirect/:path(.*)',
+    component: () => import('@/views/redirect/index')
+  }]
+},
+{
+  path: '/login',
+  component: () => import('@/views/login/index'),
+  hidden: true
+},
+{
+  path: '/404',
+  component: () => import('@/views/404'),
+  hidden: true
+}]
 
-  {
-    path: '/404',
-    component: () => import('@/views/404'),
-    hidden: true
-  },
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
+export const asyncRoutes = [
 
   {
     path: '/',
@@ -84,14 +86,8 @@ export const constantRoutes = [
         meta: { title: '项目', icon: 'form' }
       }
     ]
-  }
-]
+  },
 
-/**
- * asyncRoutes
- * the routes that need to be dynamically loaded based on user roles
- */
-export const asyncRoutes = [
   {
     path: '/nested',
     component: Layout,
@@ -178,58 +174,6 @@ export const asyncRoutes = [
       }
     ]
   },
-
-  // {
-  //   path: '/payment1',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'Payment1',
-  //       component: () => import('@/views/form/index'),
-  //       meta: { title: '支付苛厅右耐酸地面可是可右要要木威喜芝', icon: 'form' }
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: '/payment2',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'Payment2',
-  //       component: () => import('@/views/form/index'),
-  //       meta: { title: '支付苛厅右耐酸地面可是可右要要木威喜芝', icon: 'form' }
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: '/payment3',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'Payment3',
-  //       component: () => import('@/views/form/index'),
-  //       meta: { title: '支付苛厅右耐酸地面可是可右要要木威喜芝', icon: 'form' }
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   path: '/payment4',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'Payment4',
-  //       component: () => import('@/views/form/index'),
-  //       meta: { title: '支付苛厅右耐酸地面可是可右要要木威喜芝', icon: 'form' }
-  //     }
-  //   ]
-  // },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
