@@ -106,7 +106,7 @@ export default {
     getActiveMenu() {
       const { path, matched } = this.$route
       const menu = matched.filter(item => {
-        return item.path === path
+        return item.path === path || item.regex.test(path)
       })
       const parent = menu[0].parent || menu[0]
       const parentPath = this.getParentPath(parent)
