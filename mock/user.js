@@ -36,12 +36,14 @@ module.exports = [
       if (!token) {
         return {
           code: 60204,
+          success: false,
           message: 'Account and password are incorrect.'
         }
       }
 
       return {
-        code: 20000,
+        code: 200,
+        success: true,
         data: token
       }
     }
@@ -59,12 +61,14 @@ module.exports = [
       if (!info) {
         return {
           code: 50008,
+          success: false,
           message: 'Login failed, unable to get user details.'
         }
       }
 
       return {
-        code: 20000,
+        code: 200,
+        success: true,
         data: info
       }
     }
@@ -76,7 +80,8 @@ module.exports = [
     type: 'post',
     response: _ => {
       return {
-        code: 20000,
+        code: 200,
+        success: true,
         data: 'success'
       }
     }

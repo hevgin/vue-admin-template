@@ -99,6 +99,7 @@
 import { getList } from '@/api/table'
 
 export default {
+  name: 'Table',
   filters: {
     statusFilter(status) {
       const statusMap = {
@@ -126,8 +127,8 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getList().then((response) => {
-        this.list = response.data.items
+      getList().then((json) => {
+        this.list = json.items
         this.listLoading = false
       })
     },

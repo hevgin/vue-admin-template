@@ -73,6 +73,7 @@ export default {
           { required: true, trigger: 'blur', validator: validatePassword }
         ]
       },
+      checked: false,
       loading: false,
       passwordType: 'password',
       redirect: undefined
@@ -101,10 +102,9 @@ export default {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true
-          this.$store
-            .dispatch('user/login', this.loginForm)
+          this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
-              this.$router.push({ path: this.redirect || '/' })
+              location.href = this.redirect || process.env.VUE_APP_STATIC
               this.loading = false
             })
             .catch(() => {

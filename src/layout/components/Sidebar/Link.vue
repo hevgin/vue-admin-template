@@ -1,7 +1,10 @@
 <template>
-  <component :is="type" v-bind="linkProps(to)">
+  <a v-if="!isExternal" :href="href" @click="toLink">
     <slot />
-  </component>
+  </a>
+  <a v-else :href="href" target="_blank">
+    <slot />
+  </a>
 </template>
 
 <script>
@@ -12,31 +15,31 @@ export default {
     to: {
       type: String,
       required: true
+    },
+    route: {
+      type: Object,
+      required: true
     }
   },
   computed: {
     isExternal() {
       return isExternal(this.to)
     },
-    type() {
+    href() {
       if (this.isExternal) {
-        return 'a'
+        return this.to
+      } else {
+        return process.env.VUE_APP_ROUTER + this.to.substring(1)
       }
-      return 'router-link'
     }
   },
   methods: {
-    linkProps(to) {
-      if (this.isExternal) {
-        return {
-          href: to,
-          target: '_blank',
-          rel: 'noopener'
-        }
-      }
-      return {
-        to: to
-      }
+    async toLink(e) {
+      e.preventDefault()
+      await this.$store.dispatch('tagsView/delCachedView', { name: this.route.name })
+      this.$nextTick(() => {
+        this.$router.replace({ path: '/redirect' + this.to })
+      })
     }
   }
 }

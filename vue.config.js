@@ -41,7 +41,7 @@ module.exports = {
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
-    devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : undefined,
+    devtool: process.env.NODE_ENV !== 'production' ? 'eval-source-map' : undefined,
     name: name,
     resolve: {
       alias: {

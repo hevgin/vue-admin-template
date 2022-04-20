@@ -72,7 +72,9 @@ export default {
 
     handleClick(route) {
       this.activeValue = route.fullPath
-      this.$router.push({ name: route.name, params: route.params, query: route.query })
+      const params = { ...route.params }
+      delete params.noCache
+      this.$router.push({ name: route.name, params, query: route.query })
     },
 
     removeTab(targetValue) {
@@ -160,9 +162,7 @@ export default {
       this.$store.dispatch('tagsView/delCachedView', view).then(() => {
         const { fullPath } = view
         this.$nextTick(() => {
-          this.$router.replace({
-            path: '/redirect' + fullPath
-          })
+          this.$router.replace({ path: '/redirect' + fullPath })
         })
       })
     },

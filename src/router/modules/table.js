@@ -4,19 +4,19 @@ import Layout from '@/layout'
 
 const tableRouter = {
   path: '/example',
+  name: 'Example',
   component: Layout,
   redirect: '/example/table',
-  name: 'Example',
-  meta: { title: '用户', icon: 'el-icon-s-help' },
+  meta: { title: 'Table', icon: 'el-icon-s-help' },
   children: [
     {
-      path: 'table',
+      path: '/example/table',
       name: 'Table',
       component: () => import('@/views/table/index'),
       meta: { title: 'Table', icon: 'table' }
     },
     {
-      path: 'tree',
+      path: '/example/tree',
       name: 'Tree',
       component: () => import('@/views/tree/index'),
       meta: { title: 'Tree', icon: 'tree' }

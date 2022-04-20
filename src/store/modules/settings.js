@@ -2,10 +2,11 @@ import defaultSettings from '@/settings'
 import Cookies from 'js-cookie'
 
 const { title, showNavIcon, layoutType } = defaultSettings
+const layout = Cookies.get('layout') || 0
 const state = {
   title,
   showNavIcon,
-  layoutType: +Cookies.get('layout') >= 0 ? +Cookies.get('layout') : layoutType
+  layoutType: +layout >= 0 ? +layout : layoutType
 }
 
 const mutations = {

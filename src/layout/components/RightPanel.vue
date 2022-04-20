@@ -46,7 +46,8 @@ export default {
   methods: {
     async logout() {
       await this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      const fullPath = this.$route.fullPath.substring(1)
+      this.$router.push(`/login?redirect=${process.env.VUE_APP_ROUTER}${fullPath}`)
     }
   }
 }

@@ -115,3 +115,20 @@ export function param2Obj(url) {
   })
   return obj
 }
+
+/**
+* 触发浏览器下载文件
+* @param  {Blob} blob 文件对象
+* @param  {string} fileName 文件名
+*/
+export function saveBlob(blob, fileName) {
+  const a = document.createElement('a')
+  a.style = 'display:none;'
+  document.body.appendChild(a)
+  const fileUrl = window.URL.createObjectURL(blob)
+  a.href = fileUrl
+  a.download = fileName
+  a.click()
+  window.URL.revokeObjectURL(fileUrl)
+  document.body.removeChild(a)
+}
