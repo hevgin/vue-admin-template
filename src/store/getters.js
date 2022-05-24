@@ -10,6 +10,7 @@ const getters = {
   currentChildRoute: state => state.permission.currentChildRoute,
   currentRouteTitle: state => state.permission.currentRouteTitle,
   visitedViews: state => state.tagsView.visitedViews,
-  cachedViews: state => state.tagsView.cachedViews
+  cachedViews: state => state.tagsView.cachedViews,
+  dict: state => state.dict.dictionary
 }
 export default getters

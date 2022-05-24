@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { utilsRouter } from '@/router'
 import { isExternal } from '@/utils/validate'
 
 export default {
@@ -36,7 +37,17 @@ export default {
   methods: {
     async toLink(e) {
       e.preventDefault()
-      await this.$store.dispatch('tagsView/delCachedView', { name: this.route.name })
+
+      // 点击菜单处理重定向路由刷新问题
+      let name = this.route.name
+      if (this.route.redirect) {
+        const matchedRoute = utilsRouter.match(this.route.redirect)
+        if (matchedRoute.name) {
+          name = matchedRoute.name
+        }
+      }
+
+      await this.$store.dispatch('tagsView/delCachedView', { name })
       this.$nextTick(() => {
         this.$router.replace({ path: '/redirect' + this.to })
       })

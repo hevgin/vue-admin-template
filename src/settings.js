@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: '统一运营管理平台',
+  title: 'chinaunicom',
 
   /**
    * @type {boolean} true | false

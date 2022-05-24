@@ -17,7 +17,7 @@ const ajax = function(options) {
     url: '',
     data: {},
     timeout: 30000,
-    withCredentials: true,
+    withCredentials: false,
     hideToast: false,
     headers: {
       'X-Requested-With': 'XMLHttpRequest',
@@ -48,12 +48,6 @@ const ajax = function(options) {
 
   options = { ...defaults, ...options }
   options.data = options.data ? clone(options.data) : {}
-
-  if (NODE_ENV !== 'production') {
-    console.log(JSON.stringify(options.data))
-    const url = options.url.indexOf('http') === 0 ? options.url : `${BASE_API}${options.url}`
-    console.log(`%c ${url}`, 'color: #207928')
-  }
 
   return new Promise((resole, reject) => {
     let data = {}
@@ -86,10 +80,11 @@ const ajax = function(options) {
           return false
         }
 
-        if (NODE_ENV === 'development' || NODE_ENV === 'debug') {
+        if (NODE_ENV !== 'production') {
+          const url = options.url.indexOf('http') === 0 ? options.url : `${BASE_API}${options.url}`
+          console.log(`%c${url}`, 'color: #207928;')
+          console.log(JSON.stringify(options.data))
           console.log(json)
-        } else if (NODE_ENV !== 'production') {
-          console.log(JSON.stringify(json, null, 2))
         }
 
         if (json.success) {
@@ -110,6 +105,9 @@ const ajax = function(options) {
       })
       .catch((error) => {
         if (NODE_ENV !== 'production') {
+          const url = options.url.indexOf('http') === 0 ? options.url : `${BASE_API}${options.url}`
+          console.log(`%c${url}`, 'color: #207928;')
+          console.log(JSON.stringify(options.data))
           console.log(error.message)
         }
         if (error.response) {
