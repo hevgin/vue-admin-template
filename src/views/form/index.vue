@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-card shadow="never">
+    <div class="page-module">
       <el-form ref="form" :model="form" size="small" label-width="120px">
         <el-form-item label="Activity name">
           <el-input v-model="form.name" />
@@ -45,7 +45,7 @@
           <el-button type="primary" @click="onSubmit">Create</el-button>
         </el-form-item>
       </el-form>
-    </el-card>
+    </div>
   </div>
 </template>
 
