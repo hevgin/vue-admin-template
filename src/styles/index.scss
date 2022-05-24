@@ -314,36 +314,76 @@ div:focus {
   font-size: 12px;
 }
 
-
-// 列表查询
-.search-form {
-  margin-bottom: 12px;
-  .el-card__body {
-    padding-bottom: 0;
-  }
-  .el-form-item__label {
-    font-weight: normal;
-  }
-  .el-select {
-    display: block;
-  }
-  .el-date-editor.el-input,
-  .el-date-editor.el-input__inner,
-  .el-date-editor--daterange.el-input,
-  .el-date-editor--daterange.el-input__inner,
-  .el-date-editor--timerange.el-input,
-  .el-date-editor--timerange.el-input__inner {
-    width: 100%;
-  }
-}
-
-.table-list {
-  .el-card__header {
-    padding: 18px 20px 0;
+.page-module {
+  margin-bottom: 16px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 3px;
+  .module-head {
+    margin-bottom: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 0 none;
+  }
+  .module-name {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .module-handle {
+    display: flex;
+    &> * {
+      margin-left: 8px;
+    }
+  }
+  .module-body {
+
+  }
+  .module-top-info {
+    .module-top-left {
+      display: flex;
+      align-items: center;
+      .el-tag {
+        margin-right: 8px;
+      }
+      .el-dropdown-link {
+        font-size: 16px;
+        font-weight: bold;
+        color: #000;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+      .el-icon-arrow-down {
+        background: #eee;
+        padding: 3px;
+        border-radius: 3px;
+        font-weight: bold;
+        font-size: 14px;
+        color: #666;
+      }
+    }
+  }
+  .module-top-line {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+  }
+  .module-top-tabs {
+    display: flex;
+    .tab-item {
+      padding: 0 16px;
+      height: 32px;
+      line-height: 32px;
+      color: #666;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 14px;
+      &.on {
+        color: #0198F1;
+        background: #EFF6FF;
+      }
+    }
   }
 }
 

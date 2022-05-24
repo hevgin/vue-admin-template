@@ -35,8 +35,8 @@ module.exports = [
       // mock error
       if (!token) {
         return {
-          code: 60204,
-          success: false,
+          code: 200,
+          success: true,
           message: 'Account and password are incorrect.'
         }
       }

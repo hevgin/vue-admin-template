@@ -1,6 +1,34 @@
 <template>
-  <div class="app-container">
-    <el-card class="search-form" shadow="never">
+  <div v-loading.fullscreen.lock="fullscreenLoading" class="app-container">
+    <div class="page-module">
+      <div class="module-top-info">
+        <div class="module-top-left">
+          <span class="el-tag el-tag--warning el-tag--dark">未开始</span>
+          <el-dropdown>
+            <span class="el-dropdown-link">
+              <b>下拉菜单</b>
+              <i class="el-icon-arrow-down el-icon--right" />
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>黄金糕</el-dropdown-item>
+              <el-dropdown-item>狮子头</el-dropdown-item>
+              <el-dropdown-item>螺蛳粉</el-dropdown-item>
+              <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+              <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+      </div>
+      <div class="module-top-line" />
+      <div class="module-top-tabs">
+        <div class="tab-item on">概览</div>
+        <div class="tab-item">产品需求</div>
+        <div class="tab-item">产品计划</div>
+        <div class="tab-item">项目</div>
+        <div class="tab-item">文档</div>
+      </div>
+    </div>
+    <div class="page-module">
       <el-form label-width="100px" :model="form" size="small">
         <el-row :gutter="20">
           <el-col :span="8">
@@ -47,17 +75,17 @@
           </el-col>
         </el-row>
       </el-form>
-    </el-card>
+    </div>
 
-    <el-card class="table-list" shadow="never">
-      <template slot="header">
-        <span>卡片名称</span>
-        <div class="button-group">
+    <div class="page-module">
+      <div class="module-head">
+        <div class="module-name">卡片名称</div>
+        <div class="module-handle">
           <el-button size="small" type="primary" icon="el-icon-plus">新增</el-button>
           <el-button size="small" type="primary" icon="el-icon-delete">删除</el-button>
         </div>
-      </template>
-      <el-table v-loading="listLoading" :data="list" border stripe element-loading-text="Loading">
+      </div>
+      <el-table :data="list">
         <el-table-column align="center" label="ID" width="95">
           <template slot-scope="scope">
             {{ scope.$index }}
@@ -91,7 +119,7 @@
         </el-table-column>
       </el-table>
       <el-pagination :current-page="currentPage" :page-sizes="[10, 20, 30, 40]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="400" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
-    </el-card>
+    </div>
   </div>
 </template>
 
@@ -113,7 +141,7 @@ export default {
   data() {
     return {
       list: null,
-      listLoading: true,
+      fullscreenLoading: true,
       currentPage: 4,
       form: {
         user: '',
@@ -126,10 +154,10 @@ export default {
   },
   methods: {
     fetchData() {
-      this.listLoading = true
+      this.fullscreenLoading = true
       getList().then((json) => {
         this.list = json.items
-        this.listLoading = false
+        this.fullscreenLoading = false
       })
     },
     handleSizeChange(val) {
