@@ -73,7 +73,7 @@ export default {
       const path = this.getCurrentMenu()
       const name = this.getActiveMenu()
       this.setChildRoutes(name)
-
+      this._activePath = path // eslint-disable-line
       return path
     }
   },

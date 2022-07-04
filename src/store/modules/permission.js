@@ -115,7 +115,7 @@ const actions = {
         notFoundRoutes[0]
       ]
       generatePageRouteTable(accessedRoutes, pageRouteTable[0].children)
-      resolve([pageRouteTable, routes])
+      resolve([pageRouteTable, [...routes, ...constantRoutes]])
     })
   }
 }
