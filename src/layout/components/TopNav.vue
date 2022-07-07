@@ -78,12 +78,6 @@ export default {
     }
   },
 
-  watch: {
-    activePath(val) {
-      this._activePath = val
-    }
-  },
-
   mounted() {
     const self = this
     bus.$on('SET_CHILD_ROUTES', () => {
@@ -125,6 +119,9 @@ export default {
       const menus = this.routes.filter((item) => {
         return item.name === name
       })
+      if (menus.length === 0) {
+        return
+      }
       const route = menus[0].children || []
 
       const meta = menus[0].meta || route[0].meta
